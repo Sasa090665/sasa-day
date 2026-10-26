@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>عيد ميلاد صالح عمرو 🎉</title>
+  
+  <!-- Fonts & Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="style.css">
+  
+  <!-- Canvas Confetti Library -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <div class="brand">
+      <i class="fa-solid fa-cake-candles"></i>
+      صالح عمرو
+    </div>
+    <button class="admin-btn" onclick="openLoginModal()">
+      <i class="fa-solid fa-lock"></i>
+      لوحة التحكم
+    </button>
+  </header>
+
+  <!-- Main Container -->
+  <div class="container">
+    
+    <!-- Hero Section -->
+    <div class="hero-card">
+      <h1>عيد ميلاد صالح عمرو</h1>
+    </div>
+
+    <!-- Message Form -->
+    <div class="form-card">
+      <div class="form-title">
+        <i class="fa-regular fa-paper-plane" style="color: var(--primary);"></i>
+        اكتب معايدتك لصالح
+      </div>
+
+      <div class="alert-success" id="successAlert">
+        تم إرسال معايدتك بنجاح! شكرًا لك ❤️
+      </div>
+
+      <form id="greetingForm" onsubmit="handleFormSubmit(event)">
+        <div class="form-group">
+          <label for="senderName">اسمك (أو اسم الشهرة):</label>
+          <input type="text" id="senderName" placeholder="أدخل اسمك هنا..." required>
+        </div>
+
+        <div class="form-group">
+          <label for="messageText">رسالتك لصالح:</label>
+          <textarea id="messageText" placeholder="اكتب كلمتك الحلوة أو أمنيتك لصالح..." required></textarea>
+        </div>
+
+        <div class="form-group">
+          <label>إرفاق صورة (اختياري - تظهر لصالح فقط):</label>
+          <div class="file-upload-wrapper">
+            <input type="file" id="imageInput" accept="image/*" onchange="previewImage(event)">
+            <i class="fa-solid fa-cloud-arrow-up upload-icon"></i>
+            <div class="upload-text" id="uploadText">اضغط هنا لرفع صورة تجمعنا أو صورة المعايدة</div>
+            <img id="imgPreview" class="image-preview" alt="Preview">
+          </div>
+        </div>
+
+        <button type="submit" class="submit-btn">
+          إرسال المعايدة ❤️
+        </button>
+      </form>
+    </div>
+
+  </div>
+
+  <!-- Login Modal -->
+  <div class="modal" id="loginModal">
+    <div class="modal-content">
+      <i class="fa-solid fa-xmark close-modal" onclick="closeModal('loginModal')"></i>
+      <h3 style="margin-bottom: 15px; text-align: center;">دخول لوحة تحكم صالح</h3>
+      <p style="color: var(--text-muted); font-size: 0.85rem; text-align: center; margin-bottom: 20px;">
+        أدخل الرقم السري لرؤية الرسائل والصور المبعوتة
+      </p>
+      
+      <div class="form-group">
+        <input type="password" id="adminPassword" placeholder="أدخل الرقم السري..." style="width: 100%; padding: 12px; border-radius: 10px; border: 1px solid var(--border-color); outline: none;">
+      </div>
+      
+      <button class="submit-btn" onclick="verifyPassword()">دخول</button>
+    </div>
+  </div>
+
+  <!-- Admin Dashboard Modal -->
+  <div class="modal" id="adminModal">
+    <div class="modal-content admin-modal-content">
+      <i class="fa-solid fa-xmark close-modal" onclick="closeModal('adminModal')"></i>
+      <h3>صندوق رسايل عيد الميلاد 💌</h3>
+      <p style="color: var(--text-muted); font-size: 0.85rem; margin-top: 4px;">الرسائل والصور المرسلة لك فقط من أصدقائك:</p>
+
+      <div class="messages-list" id="messagesList">
+        <!-- Dynamic Content -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Custom JS -->
+  <script src="script.js"></script>
+</body>
+</html>
